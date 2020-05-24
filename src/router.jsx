@@ -30,6 +30,7 @@ function RouteItem(props) {
 
 const router = () => {
   return (
+    
     <Router>
       <Switch>
         {routes.map((route, id) => {
@@ -51,9 +52,6 @@ const router = () => {
                             path: childPath && path.join(route.path, childPath),
                             component,
                           });
-
-
-                          
                         })}
                       </Switch>
                     </RouteComponent>
