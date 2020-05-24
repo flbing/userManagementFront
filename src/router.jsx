@@ -1,10 +1,13 @@
+/**
+ * 定义应用路由
+ */
+import React from 'react';
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import React, { Suspense } from 'react';
 import path from 'path';
-import routes from '@/routerConfig';
-import PageLoading from '@/components/PageLoading';
 
-const RouteItem = (props) => {
+import routes from '@/routerConfig';
+
+function RouteItem(props) {
   const { redirect, path: routePath, component, key } = props;
   if (redirect) {
     return (
@@ -23,7 +26,7 @@ const RouteItem = (props) => {
       path={routePath}
     />
   );
-};
+}
 
 const router = () => {
   return (
@@ -39,29 +42,27 @@ const router = () => {
                 return (
                   children ? (
                     <RouteComponent key={id} {...props}>
-                      <Suspense fallback={<PageLoading />}>
-                        <Switch>
-                          {children.map((routeChild, idx) => {
-                            const { redirect, path: childPath, component } = routeChild;
-                            return RouteItem({
-                              key: `${id}-${idx}`,
-                              redirect,
-                              path: childPath && path.join(route.path, childPath),
-                              component,
-                            });
-                          })}
-                        </Switch>
-                      </Suspense>
+                      <Switch>
+                        {children.map((routeChild, idx) => {
+                          const { redirect, path: childPath, component } = routeChild;
+                          return RouteItem({
+                            key: `${id}-${idx}`,
+                            redirect,
+                            path: childPath && path.join(route.path, childPath),
+                            component,
+                          });
+                        })}
+                      </Switch>
                     </RouteComponent>
                   ) : (
-                    <Suspense fallback={<PageLoading />}>
+                    <>
                       {
                         RouteItem({
                           key: id,
                           ...props,
                         })
                       }
-                    </Suspense>
+                    </>
                   )
                 );
               }}
