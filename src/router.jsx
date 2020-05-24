@@ -30,7 +30,7 @@ function RouteItem(props) {
 
 const router = () => {
   return (
-    
+
     <Router>
       <Switch>
         {routes.map((route, id) => {
@@ -44,6 +44,7 @@ const router = () => {
                   children ? (
                     <RouteComponent key={id} {...props}>
                       <Switch>
+                        
                         {children.map((routeChild, idx) => {
                           const { redirect, path: childPath, component } = routeChild;
                           return RouteItem({
