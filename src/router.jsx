@@ -51,6 +51,9 @@ const router = () => {
                             path: childPath && path.join(route.path, childPath),
                             component,
                           });
+
+
+                          
                         })}
                       </Switch>
                     </RouteComponent>
