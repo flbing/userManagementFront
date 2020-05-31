@@ -6,7 +6,10 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import './index.scss';
 
+
+
 export default function BasicLayout({ children }) {
+
   return (
     <Layout className="basic-layout">
       <Header />
@@ -18,3 +21,6 @@ export default function BasicLayout({ children }) {
     </Layout>
   );
 }
+
+
+

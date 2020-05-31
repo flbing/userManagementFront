@@ -8,9 +8,9 @@ const FormItem = Form.Item;
 
 const UserLogin = withRouter((props) => {
   const [value, setValue] = useState({
-    username: '',
-    password: '',
-    checkbox: false,
+    userName: '',
+    passWord: '',
+    
   });
 
   function handleFormChange(formValue) {
@@ -21,9 +21,23 @@ const UserLogin = withRouter((props) => {
       console.log('errors', errors);
       return;
     }
-    console.log(values);
+    fetch('http://localhost:8080/base/user/login',{
+      method: 'POST',
+      body:JSON.stringify(values),
+      headers: {'Content-type': 'application/json;charset=UTF-8'},
+  }).then(
+      function(response){
+          if(response.status!==200){
+            
+              console.log("aaa");
+          }
+        }
+        );
+
     Message.success('登录成功');
-    props.history.push('/');
+    setValue(values);
+    sessionStorage.setItem("userName",values.userName);
+    props.history.push({ pathname: "/", props: {userName: values.userName } });
   }
 
   return (
@@ -43,7 +57,7 @@ const UserLogin = withRouter((props) => {
                 className={styles.inputIcon}
               />
 )}
-            name="username"
+            name="userName"
             size="large"
             maxLength={20}
             placeholder="用户名"
@@ -59,9 +73,9 @@ const UserLogin = withRouter((props) => {
                 className={styles.inputIcon}
               />
 )}
-            name="password"
+            name="passWord"
             size="large"
-            htmlType="password"
+            htmlType="passWord"
             placeholder="密码"
           />
         </FormItem>

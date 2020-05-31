@@ -7,6 +7,8 @@ import Logo from '../Logo';
 import './index.scss';
 
 const Header = withRouter(() => {
+ 
+  const name=sessionStorage.getItem("username");
   return (
     <div className="header-container">
       <div className="header-content">
@@ -25,7 +27,7 @@ const Header = withRouter(() => {
               />
               <div className="user-profile">
                 <span className="user-name">
-                  淘小宝
+                {name}
                 </span>
                 <br />
                 <span className="user-department">技术部</span>
